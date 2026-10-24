@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_nav_home"
+        android:title="@string/nav_home" />
+
+    <item
+        android:id="@+id/liveFragment"
+        android:icon="@drawable/ic_nav_live"
+        android:title="@string/nav_live" />
+
+    <item
+        android:id="@+id/favoriteFragment"
+        android:icon="@drawable/ic_nav_favorite"
+        android:title="@string/nav_favorite" />
+
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic_nav_history"
+        android:title="@string/nav_history" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_nav_settings"
+        android:title="@string/nav_settings" />
+
+</menu>

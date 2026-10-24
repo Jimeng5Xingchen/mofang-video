@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="v_home_title">魔方影视</string>
+    <string name="v_detail_title">海报</string>
+    <string name="v_search_hint">搜索影视名称</string>
+    <string name="v_search">搜索</string>
+    <string name="v_search_empty">输入片名开始搜索</string>
+    <string name="v_search_no_result">未找到相关内容</string>
+    <string name="v_searching">正在搜索…</string>
+    <string name="v_source_manage">影视源管理</string>
+    <string name="v_source_add">添加影视源</string>
+    <string name="v_source_name">源名称</string>
+    <string name="v_source_url">源地址</string>
+    <string name="v_source_file">选择 JSON 文件</string>
+    <string name="v_source_url_import">从 URL 导入</string>
+    <string name="v_source_empty">还没有导入影视源</string>
+    <string name="v_source_import_ok">导入成功：%1$s</string>
+    <string name="v_source_import_fail">导入失败：%1$s</string>
+    <string name="v_source_count">%1$d 个源</string>
+    <string name="v_source_on">已启用</string>
+    <string name="v_source_off">已停用</string>
+    <string name="v_detail_summary">简介</string>
+    <string name="v_detail_episodes">剧集</string>
+    <string name="v_detail_play">播放</string>
+    <string name="v_detail_favorite">收藏</string>
+    <string name="v_detail_favorited">已收藏</string>
+    <string name="v_detail_no_episode">该影片没有可播放的剧集</string>
+    <string name="v_episode_index">第 %1$d 集</string>
+    <string name="v_play_quality">清晰度</string>
+    <string name="v_play_favorite">收藏</string>
+    <string name="v_play_favorited">已收藏</string>
+    <string name="v_play_error">播放出错，请重试或切换剧集</string>
+    <string name="v_cancel">取消</string>
+    <string name="v_confirm">确定</string>
+    <string name="v_delete">删除</string>
+</resources>

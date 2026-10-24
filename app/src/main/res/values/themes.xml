@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 浅色主题 Material 3 -->
+    <style name="Theme.MofangVideo" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/mf_primary</item>
+        <item name="colorOnPrimary">@color/mf_on_primary</item>
+        <item name="colorPrimaryContainer">@color/mf_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/mf_on_primary_container</item>
+        <item name="colorSecondary">@color/mf_secondary</item>
+        <item name="colorOnSecondary">@color/mf_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/mf_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/mf_on_secondary_container</item>
+        <item name="colorTertiary">@color/mf_tertiary</item>
+        <item name="colorSurface">@color/mf_surface</item>
+        <item name="colorOnSurface">@color/mf_on_surface</item>
+        <item name="colorSurfaceVariant">@color/mf_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/mf_on_surface_variant</item>
+        <item name="colorError">@color/mf_error</item>
+        <item name="colorOnError">@color/mf_on_error</item>
+        <item name="android:colorBackground">@color/mf_background</item>
+        <item name="colorOnBackground">@color/mf_on_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="backup_title">备份与同步</string>
+    <string name="backup_hint">数据保存在手机本地，WebDAV 仅用于备份与换机恢复。</string>
+    <string name="backup_webdav_url">WebDAV 地址</string>
+    <string name="backup_username">账号</string>
+    <string name="backup_username_hint">WebDAV 用户名</string>
+    <string name="backup_password">密码</string>
+    <string name="backup_auto">自动备份到 WebDAV</string>
+    <string name="backup_probe">测试连接</string>
+    <string name="backup_to_webdav">备份到 WebDAV</string>
+    <string name="backup_from_webdav">从 WebDAV 恢复</string>
+    <string name="backup_to_local">备份到本地文件</string>
+    <string name="backup_from_local">从本地文件恢复</string>
+    <string name="backup_disconnected">未连接</string>
+    <string name="backup_connected">连接正常</string>
+    <string name="backup_local_saved">已保存到：%1$s</string>
+    <string name="backup_status_default">尚未连接 WebDAV</string>
+</resources>

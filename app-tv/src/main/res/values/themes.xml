@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TV 主题：Leanback 派生 + mf_tv_* 色板 -->
+    <style name="Theme.MofangVideo.TV" parent="Theme.Leanback">
+        <item name="colorPrimary">@color/mf_tv_primary</item>
+        <item name="colorOnPrimary">@color/mf_tv_on_primary</item>
+        <item name="colorPrimaryContainer">@color/mf_tv_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/mf_tv_on_primary_container</item>
+        <item name="android:colorBackground">@color/mf_tv_background</item>
+        <item name="android:windowBackground">@color/mf_tv_background</item>
+        <item name="android:colorForeground">@color/mf_tv_on_surface</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/mf_tv_background</item>
+    </style>
+
+    <!-- 播放页：沉浸式，隐藏状态栏 -->
+    <style name="Theme.MofangVideo.TV.Play" parent="Theme.MofangVideo.TV">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+        app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.mofangvideo.feature.video.HomeFragment"
+        android:label="首页">
+        <action
+            android:id="@id/action_home_to_detail"
+            app:destination="@id/videoDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoDetailFragment"
+        android:name="com.mofangvideo.feature.video.VideoDetailFragment"
+        android:label="详情">
+        <argument
+            android:name="sourceId"
+            app:argType="string" />
+        <argument
+            android:name="videoId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/liveFragment"
+        android:name="com.mofangvideo.feature.live.LiveFragment"
+        android:label="直播" />
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.mofangvideo.feature.history.FavoriteFragment"
+        android:label="收藏" />
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.mofangvideo.feature.history.HistoryFragment"
+        android:label="历史" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.mofangvideo.feature.settings.SettingsFragment"
+        android:label="设置">
+        <action
+            android:id="@id/action_settings_to_backup"
+            app:destination="@id/backupFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/backupFragment"
+        android:name="com.mofangvideo.feature.backup.BackupFragment"
+        android:label="备份" />
+
+</navigation>

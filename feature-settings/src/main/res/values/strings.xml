@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="s_title">设置</string>
+    <string name="s_group_playback">播放</string>
+    <string name="s_group_sources">源管理</string>
+    <string name="s_group_data">数据</string>
+    <string name="s_playback_core">播放内核</string>
+    <string name="s_playback_core_exo">ExoPlayer</string>
+    <string name="s_playback_core_system">系统播放器</string>
+    <string name="s_default_quality">默认清晰度</string>
+    <string name="s_quality_auto">自动</string>
+    <string name="s_quality_hd">高清</string>
+    <string name="s_quality_4k">4K</string>
+    <string name="s_auto_resume">自动续播</string>
+    <string name="s_auto_resume_summary">再次播放时回到上次进度</string>
+    <string name="s_video_source">影视源管理</string>
+    <string name="s_live_source">直播源管理</string>
+    <string name="s_backup">备份与同步</string>
+    <string name="s_backup_summary">数据保存在手机本地，WebDAV 用于备份与恢复</string>
+    <string name="s_about">关于</string>
+    <string name="s_version">版本 %1$s</string>
+    <string name="s_local_data_hint">所有影视源、收藏与历史均保存在本机</string>
+</resources>

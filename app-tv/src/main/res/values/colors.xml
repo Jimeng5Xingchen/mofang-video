@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TV 深色基调：复用 app 深色色板，对比度更高 -->
+    <color name="mf_tv_background">#000000</color>
+    <color name="mf_tv_surface">#101014</color>
+    <color name="mf_tv_surface_variant">#1C1B1F</color>
+    <color name="mf_tv_on_surface">#E6E1E5</color>
+    <color name="mf_tv_on_surface_variant">#CAC4D0</color>
+    <color name="mf_tv_primary">#D0BCFF</color>
+    <color name="mf_tv_on_primary">#381E72</color>
+    <color name="mf_tv_primary_container">#4F378B</color>
+    <color name="mf_tv_on_primary_container">#EADDFF</color>
+    <color name="mf_tv_secondary">#CCC2DC</color>
+    <color name="mf_tv_focus_ring">#FFD84D</color>
+</resources>

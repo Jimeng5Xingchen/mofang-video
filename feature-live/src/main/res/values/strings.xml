@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="l_title">直播</string>
+    <string name="l_source_manage">直播源管理</string>
+    <string name="l_source_add">导入 M3U 直播源</string>
+    <string name="l_source_name_hint">源名称</string>
+    <string name="l_source_url_hint">M3U 地址（http/https）</string>
+    <string name="l_source_file">选择 M3U 文件</string>
+    <string name="l_source_count">%1$d 个源</string>
+    <string name="l_source_empty">还没有导入直播源</string>
+    <string name="l_import_ok">导入成功，共 %1$d 个频道</string>
+    <string name="l_import_fail">导入失败：%1$s</string>
+    <string name="l_group_empty">暂无频道，先去导入直播源</string>
+    <string name="l_channel_playing">正在播放</string>
+    <string name="l_play_error">播放失败：%1$s</string>
+    <string name="l_favorite">收藏</string>
+    <string name="l_favorited">已收藏</string>
+    <string name="l_cancel">取消</string>
+    <string name="l_confirm">确定</string>
+    <string name="l_delete">删除</string>
+</resources>

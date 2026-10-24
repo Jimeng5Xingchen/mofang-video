@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">魔方影视</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_home">首页</string>
+    <string name="nav_live">直播</string>
+    <string name="nav_favorite">收藏</string>
+    <string name="nav_history">历史</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_backup">备份</string>
+
+    <!-- 搜索 -->
+    <string name="search_hint">搜索影视名称</string>
+    <string name="search_empty">输入片名开始搜索</string>
+    <string name="search_no_result">未找到相关内容</string>
+    <string name="search_loading">正在搜索…</string>
+
+    <!-- 影视详情 -->
+    <string name="video_title">标题</string>
+    <string name="video_year">年份</string>
+    <string name="video_actors">演员</string>
+    <string name="video_summary">简介</string>
+    <string name="video_episodes">剧集</string>
+    <string name="video_favorite">收藏</string>
+    <string name="video_favorited">已收藏</string>
+    <string name="video_play">播放</string>
+    <string name="video_detail">详情</string>
+    <string name="video_continue">续播</string>
+    <string name="video_playing">正在播放</string>
+    <string name="video_player_error">播放出错，可重试或换源</string>
+
+    <!-- 直播 -->
+    <string name="live_channels">直播频道</string>
+    <string name="live_group">分组</string>
+    <string name="live_epg">节目单</string>
+    <string name="live_now">现在</string>
+    <string name="live_next">接下来</string>
+    <string name="live_all">全部</string>
+    <string name="live_empty">还没有直播源，去设置里导入 M3U 文件吧</string>
+
+    <!-- 影视源管理 -->
+    <string name="source_manage">源管理</string>
+    <string name="source_add">添加</string>
+    <string name="source_import_file">从文件导入</string>
+    <string name="source_import_url">从 URL 导入</string>
+    <string name="source_name_hint">源名称</string>
+    <string name="source_url_hint">源地址（http/https）</string>
+    <string name="source_enable">启用</string>
+    <string name="source_disable">禁用</string>
+    <string name="source_delete">删除</string>
+    <string name="source_import_ok">导入成功：%s</string>
+    <string name="source_import_fail">导入失败：%s</string>
+    <string name="source_empty">还没有导入影视源</string>
+
+    <!-- 直播源管理 -->
+    <string name="live_source_manage">直播源管理</string>
+    <string name="live_source_import_ok">导入成功，共 %d 个频道</string>
+    <string name="live_source_import_fail">导入失败：%s</string>
+    <string name="live_source_empty">还没有导入直播源</string>
+
+    <!-- 收藏 -->
+    <string name="favorite_empty">暂无收藏</string>
+    <string name="favorite_video">影视</string>
+    <string name="favorite_live">直播</string>
+
+    <!-- 历史 -->
+    <string name="history_empty">暂无播放历史</string>
+    <string name="history_clear">清空历史</string>
+    <string name="history_clear_confirm">确定要清空全部播放历史吗？</string>
+    <string name="history_delete">删除这条记录</string>
+
+    <!-- 备份 -->
+    <string name="backup_title">备份与同步</string>
+    <string name="backup_hint">数据保存在手机本地，WebDAV 仅用于备份与换机恢复。</string>
+    <string name="backup_webdav_url">WebDAV 地址</string>
+    <string name="backup_username">账号</string>
+    <string name="backup_username_hint">WebDAV 用户名</string>
+    <string name="backup_password">密码</string>
+    <string name="backup_auto">自动备份到 WebDAV</string>
+    <string name="backup_probe">测试连接</string>
+    <string name="backup_to_webdav">备份到 WebDAV</string>
+    <string name="backup_from_webdav">从 WebDAV 恢复</string>
+    <string name="backup_to_local">备份到本地文件</string>
+    <string name="backup_from_local">从本地文件恢复</string>
+    <string name="backup_disconnected">未连接</string>
+    <string name="backup_connected">连接正常</string>
+    <string name="backup_local_saved">已保存到：%s</string>
+
+    <!-- 设置 -->
+    <string name="setting_playback_core">播放内核</string>
+    <string name="setting_default_quality">默认清晰度</string>
+    <string name="setting_auto_resume">自动续播</string>
+    <string name="setting_auto_resume_summary">再次播放时回到上次进度</string>
+    <string name="setting_source_manage">影视源管理</string>
+    <string name="setting_live_source_manage">直播源管理</string>
+    <string name="setting_backup">备份与同步</string>
+    <string name="setting_playback">播放设置</string>
+    <string name="setting_general">常规</string>
+    <string name="setting_core_exo">ExoPlayer</string>
+    <string name="setting_core_system">系统播放器</string>
+    <string name="setting_quality_auto">自动</string>
+    <string name="setting_quality_hd">高清</string>
+    <string name="setting_quality_4k">4K</string>
+
+    <!-- 通用 -->
+    <string name="action_cancel">取消</string>
+    <string name="action_confirm">确定</string>
+    <string name="action_ok">好</string>
+    <string name="action_retry">重试</string>
+    <string name="action_close">关闭</string>
+
+</resources>

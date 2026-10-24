@@ -1,0 +1,26 @@
+# Gradle / 构建产物
+build/
+.gradle/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# 签名材料 — 严禁提交
+*.jks
+*.keystore
+keystore.properties
+signing.properties
+
+# APK / 打包产物（由 CI 产出）
+*.apk
+*.aab
+*.apk.idsig
+*.jar
+# 保留 Gradle Wrapper jar（否则 ./gradlew 无法使用）
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.DS_Store
