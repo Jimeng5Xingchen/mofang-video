@@ -31,8 +31,8 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      # GitHub ubuntu-latest 镜像已预装 Android SDK（ANDROID_HOME 已导出，
+      # license 已接受，AGP 可自动补装缺失的 build-tools），无需额外 setup。
 
       - name: Cache Gradle
         uses: actions/cache@v4
