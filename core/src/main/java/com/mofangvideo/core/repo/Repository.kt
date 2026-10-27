@@ -110,4 +110,8 @@ interface SettingsRepository {
     fun setAutoResume(enable: Boolean)
     fun defaultQuality(): Flow<String>
     fun setDefaultQuality(quality: String)
+    fun updateChannel(): Flow<String>
+    fun setUpdateChannel(channel: String)
+    fun themeMode(): Flow<String>
+    fun setThemeMode(mode: String)
 }

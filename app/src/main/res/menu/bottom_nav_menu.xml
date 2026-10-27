@@ -12,18 +12,8 @@
         android:title="@string/nav_live" />
 
     <item
-        android:id="@+id/favoriteFragment"
-        android:icon="@drawable/ic_nav_favorite"
-        android:title="@string/nav_favorite" />
-
-    <item
-        android:id="@+id/historyFragment"
-        android:icon="@drawable/ic_nav_history"
-        android:title="@string/nav_history" />
-
-    <item
-        android:id="@+id/settingsFragment"
-        android:icon="@drawable/ic_nav_settings"
-        android:title="@string/nav_settings" />
+        android:id="@+id/mineFragment"
+        android:icon="@drawable/ic_nav_mine"
+        android:title="@string/nav_mine" />
 
 </menu>

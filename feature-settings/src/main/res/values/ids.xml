@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="action_settings_to_backup" type="id" />
+    <item name="action_settings_to_update" type="id" />
+    <item name="action_mine_to_favorites" type="id" />
+    <item name="action_mine_to_history" type="id" />
+    <item name="action_mine_to_settings" type="id" />
 </resources>

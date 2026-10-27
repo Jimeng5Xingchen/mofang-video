@@ -159,9 +159,28 @@ internal class TvSettingsRows(private val host: FragmentActivity) {
                 subtitle = if (vm.autoResume.value == true)
                     host.getString(R.string.tv_settings_on) else host.getString(R.string.tv_settings_off),
                 image = ""
+            ),
+            TvCard(
+                key = "set_theme",
+                title = host.getString(R.string.tv_settings_theme_mode),
+                subtitle = themeLabel(vm.themeMode.value),
+                image = ""
+            ),
+            TvCard(
+                key = "set_update",
+                title = host.getString(R.string.tv_settings_check_update),
+                subtitle = host.getString(R.string.tv_settings_check_update_sub),
+                image = "",
+                onClick = ClickTarget.OpenUpdate
             )
         )
         return listOf(TvRowModel.singleRow(host.getString(R.string.tv_tab_settings), cards))
+    }
+
+    private fun themeLabel(mode: String?): String = when (mode) {
+        "light" -> host.getString(R.string.tv_settings_theme_light)
+        "dark" -> host.getString(R.string.tv_settings_theme_dark)
+        else -> host.getString(R.string.tv_settings_theme_system)
     }
 }
 

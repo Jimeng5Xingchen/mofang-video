@@ -20,6 +20,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -27,6 +28,7 @@ dependencies {
     api(project(":core"))
     api(project(":feature-video"))
     api(project(":feature-live"))
+    api(project(":feature-history"))
     implementation(Deps.hiltAndroid)
     ksp(Deps.hiltCompiler)
 }

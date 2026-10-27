@@ -138,4 +138,9 @@ object CoreModule {
     @Singleton
     fun provideSettingsRepo(@ApplicationContext context: Context): SettingsRepository =
         SettingsRepositoryImpl(context)
+
+    @Provides
+    @Singleton
+    fun provideUpdateRepo(@ApplicationContext context: Context): com.mofangvideo.core.update.UpdateRepository =
+        com.mofangvideo.core.update.UpdateRepositoryImpl(context)
 }

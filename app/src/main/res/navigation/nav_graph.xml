@@ -42,13 +42,36 @@
         android:label="历史" />
 
     <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.mofangvideo.feature.settings.MineFragment"
+        android:label="我的">
+        <action
+            android:id="@+id/action_mine_to_favorites"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_mine_to_history"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_mine_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.mofangvideo.feature.settings.SettingsFragment"
         android:label="设置">
         <action
             android:id="@id/action_settings_to_backup"
             app:destination="@id/backupFragment" />
+        <action
+            android:id="@+id/action_settings_to_update"
+            app:destination="@id/updateFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.mofangvideo.feature.settings.UpdateFragment"
+        android:label="检查更新" />
 
     <fragment
         android:id="@+id/backupFragment"

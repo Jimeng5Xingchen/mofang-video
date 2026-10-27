@@ -24,6 +24,7 @@ data class TvCard(
 sealed class ClickTarget {
     class OpenVideo(val sourceId: String, val videoId: String) : ClickTarget()
     class OpenLive(val channel: LiveChannel) : ClickTarget()
+    object OpenUpdate : ClickTarget()
     object None : ClickTarget()
 }
 

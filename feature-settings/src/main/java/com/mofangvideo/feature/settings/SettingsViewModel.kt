@@ -27,11 +27,15 @@ class SettingsViewModel @Inject constructor(
     private val _defaultQuality = MutableLiveData("auto")
     val defaultQuality: LiveData<String> = _defaultQuality
 
+    private val _themeMode = MutableLiveData("system")
+    val themeMode: LiveData<String> = _themeMode
+
     init {
         viewModelScope.launch {
             _playbackCore.value = repo.playbackCore().first()
             _autoResume.value = repo.autoResume().first()
             _defaultQuality.value = repo.defaultQuality().first()
+            _themeMode.value = repo.themeMode().first()
         }
     }
 
@@ -48,5 +52,10 @@ class SettingsViewModel @Inject constructor(
     fun setDefaultQuality(quality: String) {
         _defaultQuality.value = quality
         viewModelScope.launch { repo.setDefaultQuality(quality) }
+    }
+
+    fun setThemeMode(mode: String) {
+        _themeMode.value = mode
+        viewModelScope.launch { repo.setThemeMode(mode) }
     }
 }

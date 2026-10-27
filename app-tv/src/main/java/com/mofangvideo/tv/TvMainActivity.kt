@@ -16,6 +16,7 @@ import com.mofangvideo.tv.leanback.ClickTarget
 import com.mofangvideo.tv.leanback.TvCard
 import com.mofangvideo.tv.leanback.TvCardRow
 import com.mofangvideo.tv.play.TvPlayActivity
+import com.mofangvideo.tv.update.TvUpdateActivity
 import com.mofangvideo.tv.vmBackup
 import com.mofangvideo.tv.vmFavorite
 import com.mofangvideo.tv.vmHistory
@@ -97,7 +98,7 @@ class TvMainActivity : FragmentActivity() {
             tab.setBackgroundResource(
                 if (i == index) R.drawable.bg_tv_tab_selected else R.drawable.bg_tv_tab
             )
-            tab.setTextColor(if (i == index) 0xFFD84DFFFF.toInt() else 0xFFE6E1E5.toInt())
+            tab.setTextColor(if (i == index) 0xFFD84DFF.toInt() else 0xFFE6E1E5.toInt())
         }
     }
 
@@ -198,6 +199,8 @@ class TvMainActivity : FragmentActivity() {
                         putExtra(TvPlayActivity.EXTRA_IS_LIVE, true)
                     }
                 )
+            ClickTarget.OpenUpdate ->
+                startActivity(Intent(this, TvUpdateActivity::class.java))
             ClickTarget.None -> Unit
         }
     }

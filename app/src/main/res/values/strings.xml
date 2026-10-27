@@ -9,6 +9,7 @@
     <string name="nav_history">历史</string>
     <string name="nav_settings">设置</string>
     <string name="nav_backup">备份</string>
+    <string name="nav_mine">我的</string>
 
     <!-- 搜索 -->
     <string name="search_hint">搜索影视名称</string>

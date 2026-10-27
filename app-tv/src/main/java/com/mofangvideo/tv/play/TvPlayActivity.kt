@@ -121,7 +121,7 @@ class TvPlayActivity : ComponentActivity() {
         h.player.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(playbackState: Int) {
                 when (playbackState) {
-                    Player.STATE_READY -> if (tvStatus.text.isBlank()) tvStatus.text = "正在播放"
+                    Player.STATE_READY -> tvStatus.text = currentStatusTitle()
                     Player.STATE_BUFFERING -> tvStatus.text = "缓冲中…"
                     Player.STATE_ENDED -> tvStatus.text = "结束"
                     else -> if (tvStatus.text.isBlank()) tvStatus.text = "正在加载…"
@@ -200,6 +200,17 @@ class TvPlayActivity : ComponentActivity() {
             historyRepo.record(FavType.VIDEO, ref, t, progress, duration)
         }
     }
+
+    private fun currentStatusTitle(): String = when {
+        !isLive && currentEpisode != null -> listOf(title, currentEpisode?.name)
+            .filter { !it.isNullOrBlank() }
+            .joinToString(" · ")
+        title.isNotBlank() -> title
+        else -> channelLabelFallback()
+    }
+
+    private fun channelLabelFallback(): String =
+        liveChannel?.name ?: "正在播放"
 
     override fun onDestroy() {
         super.onDestroy()

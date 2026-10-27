@@ -64,6 +64,32 @@
     <string name="tv_settings_on">开启</string>
     <string name="tv_settings_off">关闭</string>
 
+    <string name="tv_settings_theme_mode">主题模式</string>
+    <string name="tv_settings_theme_system">跟随系统</string>
+    <string name="tv_settings_theme_light">浅色</string>
+    <string name="tv_settings_theme_dark">深色</string>
+    <string name="tv_settings_check_update">检查更新</string>
+    <string name="tv_settings_check_update_sub">更新渠道与安装</string>
+
+    <string name="tv_update_title">检查更新</string>
+    <string name="tv_update_current">当前版本 %1$s</string>
+    <string name="tv_update_channel">更新渠道</string>
+    <string name="tv_update_channel_stable">正式版</string>
+    <string name="tv_update_channel_beta">Beta 测试版</string>
+    <string name="tv_update_check">立即检查</string>
+    <string name="tv_update_checking">正在检查更新…</string>
+    <string name="tv_update_latest">当前已是最新版本 %1$s</string>
+    <string name="tv_update_available">发现新版本 %1$s</string>
+    <string name="tv_update_notes">更新说明</string>
+    <string name="tv_update_size">安装包大小 %1$s MB</string>
+    <string name="tv_update_downloading">正在下载 %1$d%%</string>
+    <string name="tv_update_download_done">下载完成，按中键安装</string>
+    <string name="tv_update_install">安装更新</string>
+    <string name="tv_update_retry">重试</string>
+    <string name="tv_update_failed">检查失败：%1$s</string>
+    <string name="tv_update_need_permission">需要「安装未知应用」权限，按中键跳转授权</string>
+    <string name="tv_update_back">返回</string>
+
     <!-- 备份 -->
     <string name="tv_backup_title">备份</string>
     <string name="tv_backup_webdav_url">WebDAV 地址</string>

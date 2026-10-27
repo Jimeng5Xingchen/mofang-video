@@ -35,4 +35,18 @@ class SettingsRepositoryImpl(
     override fun setDefaultQuality(quality: String) {
         prefs.edit().putString("default_quality", quality).apply()
     }
+
+    override fun updateChannel(): Flow<String> =
+        flowOf(prefs.getString("update_channel", "STABLE") ?: "STABLE")
+
+    override fun setUpdateChannel(channel: String) {
+        prefs.edit().putString("update_channel", channel).apply()
+    }
+
+    override fun themeMode(): Flow<String> =
+        flowOf(prefs.getString("theme_mode", "system") ?: "system")
+
+    override fun setThemeMode(mode: String) {
+        prefs.edit().putString("theme_mode", mode).apply()
+    }
 }
