@@ -62,6 +62,11 @@ dependencies {
     api(Deps.navigationFragment)
     api(Deps.navigationUi)
 
+    // WorkManager（定时备份）
+    api(Deps.workRuntime)
+    api(Deps.hiltWork)
+    ksp(Deps.hiltWorkCompiler)
+
     // 测试
     testImplementation(Deps.junit)
     testImplementation(Deps.jsonTest)

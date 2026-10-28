@@ -66,18 +66,50 @@ interface LiveChannelRepository {
  * 备份仓库：本地数据备份/恢复到 WebDAV 或本地文件。
  */
 interface BackupRepository {
+    // 配置
     fun serverUrl(): String
     fun username(): String
+    fun backupPath(): String
     fun isConfigured(): Boolean
     fun autoBackupEnabled(): Boolean
     fun setAutoBackup(enable: Boolean)
-    fun configure(url: String, user: String, password: String)
+    fun configure(url: String, user: String, password: String, path: String)
+
+    // 连接检测
+    suspend fun testConnection(): Result<Boolean>
+
+    // WebDAV 备份/恢复
     suspend fun backupToWebDav(): Result<Boolean>
     suspend fun restoreFromWebDav(): Result<Boolean>
+    suspend fun listWebDavFiles(): Result<List<RemoteBackupFile>>
+    suspend fun restoreFromWebDavFile(fileName: String): Result<Boolean>
+
+    // 本地备份/恢复
     suspend fun backupToLocal(): Result<String>
     suspend fun restoreFromLocal(): Result<Boolean>
+    fun localBackupInfo(): LocalBackupInfo?
+
+    // 兼容旧接口（UI 旧调用）
     suspend fun probeWebDav(): Result<Boolean>
 }
+
+/**
+ * WebDAV 远程备份文件条目（核心层透出，UI 展示用）。
+ */
+data class RemoteBackupFile(
+    val name: String,
+    val sizeBytes: Long,
+    val modifiedAt: String
+)
+
+/**
+ * 本地备份文件信息。
+ */
+data class LocalBackupInfo(
+    val fileName: String,
+    val sizeBytes: Long,
+    val modifiedAt: Long
+)
 
 /**
  * 收藏仓库。

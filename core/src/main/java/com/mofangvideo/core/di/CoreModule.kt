@@ -18,6 +18,7 @@ import com.mofangvideo.core.repo.LiveChannelRepository
 import com.mofangvideo.core.repo.LiveChannelRepositoryImpl
 import com.mofangvideo.core.repo.LiveSourceRepository
 import com.mofangvideo.core.repo.LiveSourceRepositoryImpl
+import com.mofangvideo.core.repo.LocalSourceReader
 import com.mofangvideo.core.repo.SettingsRepository
 import com.mofangvideo.core.repo.SettingsRepositoryImpl
 import com.mofangvideo.core.repo.VideoRepository
@@ -71,8 +72,17 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun provideVideoSourceRepo(db: MofangDatabase, dao: VideoSourceDao): VideoSourceRepository =
-        VideoSourceRepositoryImpl(db, dao)
+    fun provideLocalSourceReader(@ApplicationContext context: Context): LocalSourceReader =
+        LocalSourceReader(context)
+
+    @Provides
+    @Singleton
+    fun provideVideoSourceRepo(
+        db: MofangDatabase,
+        dao: VideoSourceDao,
+        localReader: LocalSourceReader
+    ): VideoSourceRepository =
+        VideoSourceRepositoryImpl(db, dao, localReader)
 
     @Provides
     @Singleton
@@ -84,9 +94,10 @@ object CoreModule {
     fun provideLiveSourceRepo(
         db: MofangDatabase,
         liveSourceDao: LiveSourceDao,
-        liveChannelDao: LiveChannelDao
+        liveChannelDao: LiveChannelDao,
+        localReader: LocalSourceReader
     ): LiveSourceRepository =
-        LiveSourceRepositoryImpl(db, liveSourceDao, liveChannelDao)
+        LiveSourceRepositoryImpl(db, liveSourceDao, liveChannelDao, localReader)
 
     @Provides
     @Singleton

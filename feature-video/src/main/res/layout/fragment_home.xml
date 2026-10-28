@@ -79,11 +79,14 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/source_button"
+        style="@style/Widget.Material3.ExtendedFloatingActionButton.Icon.Primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="@string/v_source_manage"
-        app:icon="@drawable/ic_add_source" />
+        app:icon="@drawable/ic_add_source"
+        app:iconPadding="8dp"
+        app:iconSize="24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

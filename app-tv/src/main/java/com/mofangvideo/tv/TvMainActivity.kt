@@ -51,6 +51,9 @@ class TvMainActivity : FragmentActivity() {
         contentHost = findViewById(R.id.tvContentHost)
         buildTabs()
         switchTo(TvSection.VIDEO, keepFocusOnHeader = true)
+        vmBackup().status.observe(this) { message ->
+            android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun buildTabs() {
@@ -201,6 +204,9 @@ class TvMainActivity : FragmentActivity() {
                 )
             ClickTarget.OpenUpdate ->
                 startActivity(Intent(this, TvUpdateActivity::class.java))
+            ClickTarget.BackupToWebDav -> vmBackup().backupToWebDavNow()
+            ClickTarget.RestoreFromWebDav -> vmBackup().restoreFromWebDav()
+            ClickTarget.BackupToLocal -> vmBackup().backupToLocal()
             ClickTarget.None -> Unit
         }
     }

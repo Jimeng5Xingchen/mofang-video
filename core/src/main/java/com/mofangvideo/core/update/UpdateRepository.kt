@@ -59,6 +59,7 @@ class UpdateRepositoryImpl @Inject constructor(
         val request = Request.Builder()
             .url(RELEASES_API)
             .header("Accept", "application/vnd.github+json")
+            .header("User-Agent", "mofang-video-app")
             .build()
         val body = try {
             client.newCall(request).execute().use { resp ->
@@ -87,7 +88,10 @@ class UpdateRepositoryImpl @Inject constructor(
         target.delete()
         tmp.delete()
         try {
-            val request = Request.Builder().url(update.apkUrl).build()
+            val request = Request.Builder()
+                .url(update.apkUrl)
+                .header("User-Agent", "mofang-video-app")
+                .build()
             Net.client.newBuilder()
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build()

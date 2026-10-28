@@ -25,6 +25,9 @@ sealed class ClickTarget {
     class OpenVideo(val sourceId: String, val videoId: String) : ClickTarget()
     class OpenLive(val channel: LiveChannel) : ClickTarget()
     object OpenUpdate : ClickTarget()
+    object BackupToWebDav : ClickTarget()
+    object RestoreFromWebDav : ClickTarget()
+    object BackupToLocal : ClickTarget()
     object None : ClickTarget()
 }
 

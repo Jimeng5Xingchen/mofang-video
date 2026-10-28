@@ -201,19 +201,22 @@ internal class TvBackupRows(private val host: FragmentActivity) {
                 title = host.getString(R.string.tv_backup_backup),
                 subtitle = if (vm.autoBackupEnabled)
                     host.getString(R.string.tv_settings_on) else host.getString(R.string.tv_settings_off),
-                image = ""
+                image = "",
+                onClick = ClickTarget.BackupToWebDav
             ),
             TvCard(
                 key = "backup_restore",
                 title = host.getString(R.string.tv_backup_restore),
                 subtitle = "",
-                image = ""
+                image = "",
+                onClick = ClickTarget.RestoreFromWebDav
             ),
             TvCard(
                 key = "backup_local",
                 title = host.getString(R.string.tv_backup_local_backup),
                 subtitle = "",
-                image = ""
+                image = "",
+                onClick = ClickTarget.BackupToLocal
             )
         )
         return listOf(TvRowModel.singleRow(host.getString(R.string.tv_tab_backup), cards))

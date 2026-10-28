@@ -17,6 +17,8 @@ object Versions {
     const val appcompat = "1.6.1"
     const val constraintlayout = "2.1.4"
     const val lifecycle = "2.7.0"
+    const val work = "2.9.1"
+    const val hiltWork = "1.1.0"
     const val navigation = "2.7.6"
     const val recyclerview = "1.3.2"
     const val fragment = "1.6.2"
@@ -62,6 +64,9 @@ object Deps {
     const val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val workRuntime = "androidx.work:work-runtime-ktx:${Versions.work}"
+    const val hiltWork = "androidx.hilt:hilt-work:${Versions.hiltWork}"
+    const val hiltWorkCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltWork}"
 
     // 测试
     const val junit = "junit:junit:4.13.2"

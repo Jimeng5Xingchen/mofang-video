@@ -21,7 +21,8 @@ import java.util.UUID
 class LiveSourceRepositoryImpl(
     private val db: MofangDatabase,
     private val liveSourceDao: LiveSourceDao,
-    private val liveChannelDao: LiveChannelDao
+    private val liveChannelDao: LiveChannelDao,
+    private val localReader: LocalSourceReader
 ) : LiveSourceRepository {
 
     private val sources = MutableStateFlow<List<LiveSourceConfig>>(emptyList())
@@ -33,7 +34,7 @@ class LiveSourceRepositoryImpl(
 
     override suspend fun importFromFile(uri: String, name: String): Result<LiveSourceConfig> {
         val content = try {
-            Net.downloadText(uri)
+            localReader.readText(uri, "m3u", "m3u8", "txt", "json")
         } catch (e: Exception) {
             return Result.Err("读取文件失败: ${e.message}")
         }

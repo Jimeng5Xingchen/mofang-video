@@ -46,6 +46,7 @@ class WebDavBackupRepository(
         private const val KEY_URL = "webdav_url"
         private const val KEY_USER = "webdav_user"
         private const val KEY_PASSWORD = "webdav_pass"
+        private const val KEY_PATH = "webdav_path"
         private const val KEY_AUTO = "webdav_auto_backup"
     }
 
@@ -54,6 +55,7 @@ class WebDavBackupRepository(
     fun serverUrl(): String = prefs.getString(KEY_URL, "") ?: ""
     fun username(): String = prefs.getString(KEY_USER, "") ?: ""
     fun password(): String = prefs.getString(KEY_PASSWORD, "") ?: ""
+    fun backupPath(): String = prefs.getString(KEY_PATH, "") ?: ""
     fun isConfigured(): Boolean =
         serverUrl().isNotEmpty() && username().isNotEmpty() && password().isNotEmpty()
 
@@ -63,11 +65,12 @@ class WebDavBackupRepository(
         prefs.edit().putBoolean(KEY_AUTO, enable).apply()
     }
 
-    fun configure(url: String, user: String, password: String) {
+    fun configure(url: String, user: String, password: String, path: String = "") {
         prefs.edit()
             .putString(KEY_URL, url)
             .putString(KEY_USER, user)
             .putString(KEY_PASSWORD, password)
+            .putString(KEY_PATH, path.trim().trimStart('/'))
             .apply()
     }
 
@@ -100,23 +103,25 @@ class WebDavBackupRepository(
      * 上传备份到 WebDAV（PUT）。
      * 未配置服务端时返回 false。
      */
-    suspend fun uploadToWebDav(json: String): Boolean = withContext(Dispatchers.IO) {
-        if (!isConfigured()) return@withContext false
-        val request = Request.Builder()
-            .url(buildBackupUrl(serverUrl(), FILE_NAME))
-            .put(json.toRequestBody("application/json; charset=utf-8".toMediaType()))
-            .header("Authorization", Credentials.basic(username(), password()))
-            .build()
-        okHttpClient.newCall(request).execute().use { resp -> resp.isSuccessful }
-    }
+    suspend fun uploadToWebDav(json: String, fileName: String = FILE_NAME): Boolean =
+        withContext(Dispatchers.IO) {
+            if (!isConfigured()) return@withContext false
+            ensureBackupDir()
+            val request = Request.Builder()
+                .url(buildBackupUrl(serverUrl(), backupPath(), fileName))
+                .put(json.toRequestBody("application/json; charset=utf-8".toMediaType()))
+                .header("Authorization", Credentials.basic(username(), password()))
+                .build()
+            okHttpClient.newCall(request).execute().use { resp -> resp.isSuccessful }
+        }
 
     /**
      * 从 WebDAV 下载备份（GET）。未配置或无文件时返回 null。
      */
-    suspend fun downloadFromWebDav(): String? = withContext(Dispatchers.IO) {
+    suspend fun downloadFromWebDav(fileName: String = FILE_NAME): String? = withContext(Dispatchers.IO) {
         if (!isConfigured()) return@withContext null
         val request = Request.Builder()
-            .url(buildBackupUrl(serverUrl(), FILE_NAME))
+            .url(buildBackupUrl(serverUrl(), backupPath(), fileName))
             .get()
             .header("Authorization", Credentials.basic(username(), password()))
             .build()
@@ -126,20 +131,93 @@ class WebDavBackupRepository(
     }
 
     /**
-     * 检查 WebDAV 上是否存在备份文件（PROPFIND）。
+     * 检查 WebDAV 上是否存在备份文件（PROPFIND Depth 0）。
      */
     suspend fun probeWebDav(): Boolean = withContext(Dispatchers.IO) {
         if (!isConfigured()) return@withContext false
         val body = """<?xml version="1.0"?><D:propfind xmlns:D="DAV:"><D:prop><D:getcontentlength/></D:prop></D:propfind>"""
             .toRequestBody("application/xml; charset=utf-8".toMediaType())
         val request = Request.Builder()
-            .url(buildBackupUrl(serverUrl(), FILE_NAME))
+            .url(buildBackupUrl(serverUrl(), backupPath(), FILE_NAME))
             .method("PROPFIND", body)
             .header("Authorization", Credentials.basic(username(), password()))
             .header("Depth", "0")
             .build()
         okHttpClient.newCall(request).execute().use { resp ->
             resp.code == 200 || resp.code == 207
+        }
+    }
+
+    /**
+     * 连接可用性检测：对配置的目录路径发 PROPFIND Depth 0。
+     * 目录存在（207/200）即视为连接可用；目录不存在（404/409）时尝试创建目录后再次探测。
+     */
+    suspend fun testConnection(): Boolean = withContext(Dispatchers.IO) {
+        if (!isConfigured()) return@withContext false
+        val target = buildBackupUrl(serverUrl(), backupPath(), "")
+        val result = propfind(target, "0")
+        when {
+            result -> true
+            else -> {
+                ensureBackupDir()
+                propfind(target, "0")
+            }
+        }
+    }
+
+    /**
+     * 列出远程目录下全部文件（PROPFIND Depth 1）。
+     */
+    suspend fun listRemoteFiles(): List<RemoteBackupFile> = withContext(Dispatchers.IO) {
+        if (!isConfigured()) return@withContext emptyList()
+        val target = buildBackupUrl(serverUrl(), backupPath(), "")
+        val body = """<?xml version="1.0"?><D:propfind xmlns:D="DAV:"><D:prop><D:getcontentlength/><D:getlastmodified/></D:prop></D:propfind>"""
+            .toRequestBody("application/xml; charset=utf-8".toMediaType())
+        val request = Request.Builder()
+            .url(target)
+            .method("PROPFIND", body)
+            .header("Authorization", Credentials.basic(username(), password()))
+            .header("Depth", "1")
+            .build()
+        try {
+            okHttpClient.newCall(request).execute().use { resp ->
+                if (resp.code != 207) return@use emptyList()
+                parseMultiStatus(resp.body?.string())
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    private suspend fun propfind(url: String, depth: String): Boolean = withContext(Dispatchers.IO) {
+        val body = """<?xml version="1.0"?><D:propfind xmlns:D="DAV:"><D:prop><D:getcontentlength/></D:prop></D:propfind>"""
+            .toRequestBody("application/xml; charset=utf-8".toMediaType())
+        val request = Request.Builder()
+            .url(url)
+            .method("PROPFIND", body)
+            .header("Authorization", Credentials.basic(username(), password()))
+            .header("Depth", depth)
+            .build()
+        try {
+            okHttpClient.newCall(request).execute().use { resp ->
+                resp.code == 207 || resp.code == 200
+            }
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    private suspend fun ensureBackupDir() {
+        val dir = buildBackupUrl(serverUrl(), backupPath(), "")
+        try {
+            val request = Request.Builder()
+                .url(dir)
+                .method("MKCOL", null)
+                .header("Authorization", Credentials.basic(username(), password()))
+                .build()
+            okHttpClient.newCall(request).execute().close()
+        } catch (e: Exception) {
+            // 目录已存在或服务器不支持 MKCOL 时忽略
         }
     }
 
@@ -212,11 +290,68 @@ class WebDavBackupRepository(
         return if (file.exists()) file.readText() else null
     }
 
-    private fun buildBackupUrl(server: String, file: String): String {
+    /**
+     * 上次本地备份文件信息（不存在返回 null）。
+     */
+    fun localBackupInfo(context: Context): LocalBackupInfo? {
+        val file = File(context.filesDir, "backup/$FILE_NAME")
+        return if (file.exists()) {
+            LocalBackupInfo(
+                fileName = FILE_NAME,
+                sizeBytes = file.length(),
+                modifiedAt = file.lastModified()
+            )
+        } else null
+    }
+
+    /** 本地备份文件信息。 */
+    data class LocalBackupInfo(
+        val fileName: String,
+        val sizeBytes: Long,
+        val modifiedAt: Long
+    )
+
+    private fun buildBackupUrl(server: String, path: String, file: String): String {
         val base = if (server.endsWith("/")) server else "$server/"
-        return "$base$file"
+        val pathSegment = if (path.isBlank()) "" else "${path.trim('/')}/"
+        return "$base$pathSegment$file"
+    }
+
+    private fun parseMultiStatus(xml: String?): List<RemoteBackupFile> {
+        if (xml.isNullOrBlank()) return emptyList()
+        val files = mutableListOf<RemoteBackupFile>()
+        // 兼容 d:/D:/无前缀 三种命名空间写法
+        val hrefRegex = Regex("<(?:[A-Za-z0-9_-]+:)?href>([^<]+)</(?:[A-Za-z0-9_-]+:)?href>")
+        val lengthRegex =
+            Regex("<(?:[A-Za-z0-9_-]+:)?getcontentlength>([^<]+)</(?:[A-Za-z0-9_-]+:)?getcontentlength>")
+        val modifiedRegex =
+            Regex("<(?:[A-Za-z0-9_-]+:)?getlastmodified>([^<]+)</(?:[A-Za-z0-9_-]+:)?getlastmodified>")
+        val responseSplit = Regex("<(?:[A-Za-z0-9_-]+:)?response[ >]")
+        val entries = responseSplit.split(xml).drop(1)
+        for (entry in entries) {
+            val href = hrefRegex.find(entry)?.groupValues?.get(1)?.trim() ?: continue
+            val name = href.trim('/').substringAfterLast('/')
+            if (name.isBlank()) continue
+            files += RemoteBackupFile(
+                name = name,
+                href = href,
+                sizeBytes = lengthRegex.find(entry)?.groupValues?.get(1)?.trim()?.toLongOrNull() ?: 0L,
+                modifiedAt = modifiedRegex.find(entry)?.groupValues?.get(1)?.trim() ?: ""
+            )
+        }
+        return files
     }
 }
+
+/**
+ * WebDAV 远程备份文件条目。
+ */
+data class RemoteBackupFile(
+    val name: String,
+    val href: String,
+    val sizeBytes: Long,
+    val modifiedAt: String
+)
 
 // ===== JSON 序列化 =====
 

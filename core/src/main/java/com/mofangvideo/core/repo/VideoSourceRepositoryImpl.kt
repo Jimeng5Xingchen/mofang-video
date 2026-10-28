@@ -21,7 +21,8 @@ import java.util.UUID
  */
 class VideoSourceRepositoryImpl(
     private val db: MofangDatabase,
-    private val videoSourceDao: VideoSourceDao
+    private val videoSourceDao: VideoSourceDao,
+    private val localReader: LocalSourceReader
 ) : VideoSourceRepository {
 
     private val sources = MutableStateFlow<List<VideoSourceConfig>>(emptyList())
@@ -33,7 +34,7 @@ class VideoSourceRepositoryImpl(
 
     override suspend fun importFromFile(uri: String): Result<VideoSourceConfig> {
         val content = try {
-            Net.downloadText(uri)
+            localReader.readText(uri, "json")
         } catch (e: Exception) {
             return Result.Err("读取文件失败: ${e.message}")
         }
